@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const hostname = '0.0.0.0';
+const hostname = '127.0.0.1';
 const port = 3000;
 
 const mongoose = require('mongoose');
@@ -12,17 +12,17 @@ const mongooseParams = {
     useCreateIndex: true
 }
 
-mongoose.connect('mongodb://mongo/apinodeipssi', mongooseParams); // docker (mongo = nom du container)
-// mongoose.connect('mongodb://localhost:27017/apinodeipssi', mongooseParams); // windows
+//mongoose.connect('mongodb://mongo/apinodeipssi', mongooseParams); // docker (mongo = nom du container)
+mongoose.connect('mongodb://localhost:27017/apinodeipssi', mongooseParams); // windows
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded( { extended: true } ));
 app.use(bodyParser.json());
 
-const postModel = require('./api/models/postModel');
+const userModel = require('./api/models/userModel');
 
 
-const postRoute = require('./api/routes/postRoute');
-postRoute(app);
+const userRoute = require('./api/routes/userRoute');
+userRoute(app);
 
 app.listen(port, hostname);
