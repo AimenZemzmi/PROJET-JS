@@ -1,0 +1,70 @@
+#contenu {
+    margin : 35px;
+}
+
+#menu {
+    background-color: #ED0000; 
+    color: #ffffff;
+}
+
+h2 {
+    display:block; 
+    margin: auto;
+}
+
+footer{
+    position: absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background-color: #16B84E;
+    color: white;
+    bottom: 0px;
+}
+
+
+
+#formulaire{
+    margin-top: 100px;
+}
+
+#formulaire-grp{
+    width : 50%;
+    display : block;
+    margin: auto;
+}
+
+.ajout-grp,  .ajout-personne, a {
+    color : white;
+}
+
+.ajout-grp, .ajout-personne, a:hover {
+    text-decoration: none;
+    color : white;
+}
+
+#boutons_form {
+    display: block;
+    margin: auto;
+}
+
+
+
+.bootstrap-table .fixed-table-container .fixed-table-body {
+    height: unset !important;
+}
+
+#tbl-grp {
+    text-align : center; 
+}
+
+#tbl-grp a {
+    color: black;
+}
+
+#tbl-grp a:hover {
+    color: orange;
+    text-decoration: none;
+}
+
+

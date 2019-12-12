@@ -1,0 +1,78 @@
+<html>
+<head> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
+<link rel="icon" class = "rounded" type= "image/jpg" href="images/santa.png">
+<link rel="stylesheet" href="css/santa.css">
+
+<meta charset="utf-8">
+
+<title>Secret Santa</title>
+
+</head>
+
+<body>
+
+    <nav class = "navbar navbar-expand-sm" id="menu" style = "background-color: #ED0000; color: #ffffff;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="accueil.html"><img src = "images/santa.png" style = "width: 35px;" ></a>
+            </li>
+        </ul>
+        <h2><strong>Secret Santa</strong></h2>
+    </nav>   
+
+
+    <div id = "contenu">    
+
+        <center><h3>Ajouter une personne dans "nom du groupe"</h3></center>
+
+        <div id = "formulaire">
+
+            <form id = "formulaire-grp">
+                <label class = "col-form-label"style ="display: inline-block;">Prénom</label>
+                <input class = "form-control" type = "text"/>
+                <label class = "col-form-label"style ="display: inline-block;">Nom</label>
+                <input class = "form-control" type = "text"/>
+                <label class = "col-form-label"style ="display: inline-block;">Email</label>
+                <input class = "form-control" type = "text"/>
+                <br><br>
+                <div id = "boutons_form">
+                    <input type = "submit" class = "btn" value = "Ajouter" style = "background-color : #16B84E; color: white;"/>
+                    &nbsp &nbsp
+                    <button class = "btn" style = "background-color : #ED0000; color: white;"><a href = "groupe.html">Annuler</a></button>
+                </div>            
+            </form>
+
+        </div>
+       
+        
+    </div>
+
+    <footer>
+        <center><p><strong>Et un joyeux Noël à tous</strong></p></center>
+    </footer>
+
+</body>
+
+<script>
+
+function actionFormatter(value, row, index) {
+    return [
+        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
+        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
+    ].join('');
+}
+
+</script>
+
+</html>
+
