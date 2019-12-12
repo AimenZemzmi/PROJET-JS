@@ -46,3 +46,40 @@ exports.create_a_user = (req, res) => {
   })
 }
 
+exports.get_a_user = (req, res) => {
+    User.findById(req.params.idUser, function (error,adventure) {
+        if(error){
+            res.status(500);
+            res.json({message: "Server error"});
+        }else {
+            res.status(200);
+            res.json(adventure);
+        }
+    });
+}
+
+exports.update_a_user = (req, res) => {
+    User.findOneAndUpdate({_id: req.params.idUser}, req.body, {new: true}, (error, adventure) => {
+        if(error){
+            res.status(500);
+            res.json({message: "Server error"});
+        }else {
+            res.status(200);
+            res.json(adventure);
+        }
+    });
+}
+
+exports.delete_a_user = (req, res) => {
+  User.remove({_id: req.params.idUser}, (error) => {
+    if(error){
+      res.status(500);
+      console.log(error);
+      res.json({message: "Erreur serveur."});
+    }
+    else {
+      res.status(200);
+      res.json({message: "Article supprimé"});
+    }
+  })
+}
