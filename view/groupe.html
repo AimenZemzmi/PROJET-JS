@@ -32,6 +32,33 @@
 
     <div id = "contenu">    
 
+
+          <script>
+             document.addEventListener('DOMContentLoaded', function() {
+
+                let CheminComplet = document.location.href;
+                let idGroup  = CheminComplet.substring(CheminComplet.indexOf("?")+1);
+                //let idGroup = '5df23e27fd65b300b14f5480';
+                let mesInfos = {
+                    idGroup: idGroup
+                };
+               $.ajax({
+                   dataType: "json",
+                   type: "GET",
+                   url: 'localhost:3000/groupForUser/?'+mesInfos.idGroup,
+                  success: callBackAjaxGroupListOnce
+                 });
+
+               function callBackAjaxGroupListOnce(response) {
+                 return Object.values(response).forEach((res) => {
+                     let child = '<tr><td id="'+res._id+'">'+res.nom+'</td></tr>';
+                     $('#tbodyListGroup').append(child);
+
+                 });
+               }
+             });
+         </script>
+
         <center><h3><strong>Liste des personnes présentes dans "Nom du groupe"</strong></h3></center>
 
         <button class = "btn btn-success ajout-personne"> 
@@ -66,7 +93,6 @@
                         <td> Prénom 4 Nom 4 </td>                    
                     </tr>
                 </tbody>
-                
         </table>
 
     </div>

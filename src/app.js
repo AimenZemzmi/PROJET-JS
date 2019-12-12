@@ -1,7 +1,10 @@
 const express = require('express');
 const app = express();
 
-const hostname = '127.0.0.1';
+const cors = require('cors');
+app.use(cors());
+
+const hostname = '0.0.0.0';
 const port = 3000;
 
 const mongoose = require('mongoose');
@@ -22,9 +25,9 @@ app.use(bodyParser.json());
 const userModel = require('./api/models/userModel');
 const groupModel = require('./api/models/groupModel');
 
+
 const userRoute = require('./api/routes/userRoute');
 userRoute(app);
-
 const groupRoute = require('./api/routes/groupRoute');
 groupRoute(app);
 

@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head> 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -43,13 +43,36 @@
                 <br><br>
 
                 <div id = "boutons_form">
-                    <input type = "submit" class = "btn" value = "Ajouter" style = "background-color : #16B84E; color: white;"/>
+                    <!--<button onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</button>-->
+                    <span id="add_group" onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</span>
                     &nbsp &nbsp
                     <button class = "btn" style = "background-color : #ED0000; color: white;"><a href = "accueil.html">Annuler</a></button>
                 </div>
             </form>
 
         </div>
+
+        <script>
+            function callSubmit(){
+                let nameGroup = document.querySelector('.form-control');
+                let addGroup = document.querySelector('#add_group');
+                //let monForm = document.getElementById('add_group');
+                addGroup.addEventListener('click', function(event){
+                  event.preventDefault();
+                  let mesInfos = {
+                    nom: nameGroup.value
+                  };
+
+                  $.ajax({
+                    dataType: "json",
+                    type: "POST",
+                    url: 'http://localhost:3000/group/list',
+                    data: mesInfos,
+                    success: document.location.href="http://localhost/js/js1/docker_node_mongo/view/accueil.html"
+                  });
+                })
+            }
+        </script>
        
         
     </div>

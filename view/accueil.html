@@ -1,3 +1,4 @@
+<script src="../../app.js"></script>
 <html>
 <head> 
 
@@ -53,35 +54,27 @@
                     </tr>
                 </thead>
 
-                <tbody style = "text-align: center;">
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 1
-                            </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 2
-                            </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 3
-                            </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 4
-                            </a>
-                        </td>         
-                    </tr>
+                <tbody id="tbodyListGroup" style = "text-align: center;">
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                          $.ajax({
+                              dataType: "json",
+                              type: "GET",
+                              url: 'http://localhost:3000/group/list/',
+                              data: "check",
+                             success: callBackAjaxGroupList
+                            });
+
+                          function callBackAjaxGroupList(response) {
+                            return Object.values(response).forEach((res) => {
+                                let child = '<tr><td><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td></tr>';
+                                $('#tbodyListGroup').append(child);
+
+                            });
+                          }
+                        });
+
+                    </script>
                 </tbody>
 
         </table>
