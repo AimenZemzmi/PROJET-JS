@@ -2,8 +2,12 @@
     margin : 35px;
 }
 
+body {
+    background-image: url("../images/fond.gif");
+}
+
 #menu {
-    background-color: #ED0000; 
+    background-color: #dc3545; 
     color: #ffffff;
 }
 
@@ -17,7 +21,7 @@ footer{
     bottom:0;
     left:0;
     right:0;
-    background-color: #16B84E;
+    background-color: #28a745;
     color: white;
     bottom: 0px;
 }
