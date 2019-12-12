@@ -1,0 +1,110 @@
+<html>
+<head> 
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
+<link rel="icon" class = "rounded" type= "image/jpg" href="images/santa.png">
+<link rel="stylesheet" href="css/santa.css">
+
+<meta charset="utf-8">
+
+<title>Secret Santa</title>
+
+</head>
+
+<body>
+
+    <nav class = "navbar navbar-expand-sm" id="menu" style = "background-color: #ED0000; color: #ffffff;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="accueil.html"><img title = "Revenir à la page d'accueil" src = "images/santa.png" style = "width: 35px;" ></a>
+            </li>
+        </ul>
+        <h2><strong>Secret Santa</strong></h2>
+    </nav> 
+
+
+    <div id = "contenu">    
+
+        <center><h3><strong>Liste des groupes</strong></h3></center>
+       
+        <button class = "btn btn-success ajout-grp"> 
+            <a href = "add_grp.html">Ajouter un groupe</a>
+        </button>
+
+        <table id="tbl-grp" class ="table table-striped table-hover"
+                data-toolbar=".ajout-grp"
+				data-toggle="table" 
+				data-page-size="15" 
+                data-page-list="[5,10,15,20,50,100,200,500,All]" 
+                data-search="true">
+                
+                <thead style = "text-align: center;">
+                    <tr>
+                        <th>Nom du groupe</th>
+                        <th  data-formatter="actionFormatter" >Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody style = "text-align: center;">
+                    <tr>
+                        <td> 
+                            <a href = "groupe.html">
+                                Groupe 1
+                            </a>
+                        </td>         
+                    </tr>
+                    <tr>
+                        <td> 
+                            <a href = "groupe.html">
+                                Groupe 2
+                            </a>
+                        </td>         
+                    </tr>
+                    <tr>
+                        <td> 
+                            <a href = "groupe.html">
+                                Groupe 3
+                            </a>
+                        </td>         
+                    </tr>
+                    <tr>
+                        <td> 
+                            <a href = "groupe.html">
+                                Groupe 4
+                            </a>
+                        </td>         
+                    </tr>
+                </tbody>
+
+        </table>
+
+    </div>
+
+
+    <footer>
+        <center><p><strong>Et un joyeux Noël à tous</strong></p></center>
+    </footer>
+
+</body>
+
+<script>
+
+function actionFormatter(value, row, index) {
+    return [
+        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
+        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
+    ].join('');
+}
+
+</script>
+
+</html>
+
