@@ -20,7 +20,7 @@ exports.list_user_group = (req, res) => {
     User.find({idGroup : req.params.id}, function (error,adventure) {
         if(error){
             res.status(500);
-            res.json({message: "Server error"});
+            res.json({message: "Server error List User Group"});
         }else {
             res.status(200);
             res.json(adventure);
@@ -37,7 +37,7 @@ exports.create_a_user = (req, res) => {
     if(error){
       res.status(500);
       console.log(error);
-      res.json({message: "Erreur serveur."});
+      res.json({message: "Erreur serveur Create."});
     }
     else {
       res.status(200);
@@ -83,4 +83,3 @@ exports.delete_a_user = (req, res) => {
     }
   })
 }
-
