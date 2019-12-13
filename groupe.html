@@ -38,32 +38,30 @@
                 <a href = "add_personne.html">Ajouter une personne</a>
         </button>
 
-        <table id="tbl-grp" class ="table table-striped table-hover"
-                data-toolbar=".ajout-personne"
-				data-toggle="table" 
-				data-page-size="15" 
-                data-page-list="[5,10,15,20,50,100,200,500,All]" 
-                data-search="true">
-                
-                <thead style = "text-align: center;">
-                    <tr>
-                        <th>Membres</th>
-                        <th  data-formatter="actionFormatter" >Actions</th>
-                    </tr>
-                </thead>
+        <div id = "tableau">
+            <table id="tbl-personne" class ="table table-striped table-hover"
+                    data-toggle="table" 
+                    data-page-size="15" 
+                    data-page-list="[5,10,15,20,50,100,200,500,All]" >
+                    
+                    <thead style = "text-align: center;">
+                        <tr>
+                            <th>Membres</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
 
-                <tbody style = "text-align: center;">
-                    <tr>
-                        <td> Prénom 1 Nom 1</td>      
-                        <td>
-                            <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
-                            &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
-                        </td>                   
-                    </tr>
-                 
-                </tbody>
-                
-        </table>
+                    <tbody style = "text-align: center;">
+                        <tr>
+                            <td> Prénom 1 Nom 1</td>      
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
+                                &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
+                            </td>                   
+                        </tr>
+                    </tbody>
+                </div>
+            </table>
 
     </div>
 
