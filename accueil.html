@@ -21,7 +21,7 @@
 
 <body>
 
-    <nav class = "navbar navbar-expand-sm" id="menu" style = "background-color: #ED0000; color: #ffffff;">
+    <nav class = "navbar navbar-expand-sm" id="menu">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="accueil.html"><img title = "Revenir à la page d'accueil" src = "images/santa.png" style = "width: 35px;" ></a>
@@ -46,7 +46,7 @@
                 data-page-list="[5,10,15,20,50,100,200,500,All]" 
                 data-search="true">
                 
-                <thead style = "text-align: center;">
+                <thead style = "text-align: center; z-index: 10000;">;
                     <tr>
                         <th>Nom du groupe</th>
                         <th  data-formatter="actionFormatter" >Actions</th>
@@ -59,27 +59,10 @@
                             <a href = "groupe.html">
                                 Groupe 1
                             </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 2
-                            </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 3
-                            </a>
-                        </td>         
-                    </tr>
-                    <tr>
-                        <td> 
-                            <a href = "groupe.html">
-                                Groupe 4
-                            </a>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
+                            &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
                         </td>         
                     </tr>
                 </tbody>
@@ -95,16 +78,7 @@
 
 </body>
 
-<script>
 
-function actionFormatter(value, row, index) {
-    return [
-        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
-        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
-    ].join('');
-}
-
-</script>
 
 </html>
 
