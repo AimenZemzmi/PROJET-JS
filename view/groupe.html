@@ -31,7 +31,7 @@
     </nav>  
 
     <div id = "contenu">
-        <center><h3><strong>Liste des personnes présentes dans "Nom du groupe"</strong></h3></center>
+        <center><h3><strong>Liste des personnes présentes</strong></h3></center>
 
         <!--<button onclick="creatUser()" class="btn btn-success">Ajouter une personne</button>-->
         <a onclick="creatUser()" class="btn btn-success" style="color: white">Ajouter une personne</a>
@@ -46,6 +46,7 @@
                     <tr>
                         <th>Membres</th>
                         <th>Cadeau</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
@@ -89,18 +90,31 @@
                   });
 
                  function callBackAjaxGroupForUser(result){
-                     console.log(result)
-                     let child = '<tr id="simpleLine"><td id="'+res._id+'">'+res.nom+'</td></td>'+
-                                  '<td><p id ="'+index+'" style = "display : none;">'+result.nom+'</p>'+
+                     let resultName;
+                     if(result != null){
+                         resultName = result.nom;
+                     } else {
+                         resultName = res;
+                     }
+                     let child = '<tr id="simpleLine"><td id="'+res._id+'">'+res.nom+' '+res.prenom+'</td></td>'+
+                                  '<td><p id ="'+index+'" style = "display : none;">'+resultName+'</p>'+
                                   '<button id ="'+index+'" class ="btn btn-gift" style = "background-color: #f39c12; color: white;" onclick="afficher_Cadeau('+index+')">'+
-                                  '<i class="fas fa-gift"></i></button></td></tr>';
+                                  '<i class="fas fa-gift"></i></button></td>' +
+                                  '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_'+index+'" onclick="updateBtn('+index+')" title="Modifier">'+
+                                  '<span class="fas fa-edit"></span></button>'+
+                                  '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_'+index+'" onclick="RemoveBtn('+index+')" title="Supprimer">'+
+                                  '<span class="fas fa-trash-alt"></span></button></td></tr>';
                       $('#tbodyListGroup').append(child);
                  }
              } else {
-                let child = '<tr id="simpleLine"><td id="'+res._id+'">'+res.nom+'</td></td>'+
+                let child = '<tr id="simpleLine"><td id="'+res._id+'">'+res.nom+' '+res.prenom+'</td></td>'+
                             '<td><p id ="'+index+'" style = "display : none;">'+res+'</p>'+
                             '<button id ="'+index+'" class ="btn btn-gift" style = "background-color: #f39c12; color: white;" onclick="afficher_Cadeau('+index+')">'+
-                            '<i class="fas fa-gift"></i></button></td></tr>';
+                            '<i class="fas fa-gift"></i></button></td>' +
+                            '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_'+index+'" onclick="updateBtn('+index+')" title="Modifier">'+
+                            '<span class="fas fa-edit"></span></button>'+
+                            '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_'+index+'" onclick="RemoveBtn('+index+')" title="Supprimer">'+
+                            '<span class="fas fa-trash-alt"></span></button></td></tr>';
                 $('#tbodyListGroup').append(child);
              }
          });
@@ -150,6 +164,51 @@
             success: document.location.reload()
         })
     }
+
+    function RemoveBtn(index) {
+        let CheminComplet = document.location.href;
+        let idGroupUrl  = CheminComplet.substring(CheminComplet.indexOf("?")+1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+
+         $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupForUser/'+mesInfos.idGroup,
+            success: callBackAjaxGroupListRemove
+         });
+         function callBackAjaxGroupListRemove(resultGroupListUsers){
+             $.ajax({
+                 dataType: "json",
+                 type: "DELETE",
+                 url: 'http://localhost:3000/groupForUser/'+mesInfos.idGroup+'/user/'+resultGroupListUsers[index]._id,
+                 data: "checkDelete",
+                 success: document.location.reload()
+             });
+         }
+    }
+
+    function updateBtn(index) {
+        let CheminComplet = document.location.href;
+        let idGroupUrl  = CheminComplet.substring(CheminComplet.indexOf("?")+1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('groupe.html'));
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupForUser/'+mesInfos.idGroup,
+            success: callBackAjaxUpdateBtn
+        });
+
+        function callBackAjaxUpdateBtn(result) {
+            document.location.href=cheminFolder+ "update_personne.html?" + mesInfos.idGroup + "?" + result[index]._id;
+        }
+    }
+
 </script>
 
 </html>
