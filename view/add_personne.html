@@ -39,16 +39,16 @@
 
             <form id = "formulaire-grp">
                 <label class = "col-form-label"style ="display: inline-block;">Prénom</label>
-                <input class = "form-control" type = "text"/>
+                <input id='firstName' class = "form-control" type = "text"/>
                 <label class = "col-form-label"style ="display: inline-block;">Nom</label>
-                <input class = "form-control" type = "text"/>
+                <input id='lastName' class = "form-control" type = "text"/>
                 <label class = "col-form-label"style ="display: inline-block;">Email</label>
-                <input class = "form-control" type = "text"/>
+                <input id='mail' class = "form-control" type = "text"/>
                 <br><br>
                 <div id = "boutons_form">
-                    <input type = "submit" class = "btn" value = "Ajouter" style = "background-color : #16B84E; color: white;"/>
+                    <span id="add_group" onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</span>
                     &nbsp &nbsp
-                    <button class = "btn" style = "background-color : #ED0000; color: white;"><a href = "groupe.html">Annuler</a></button>
+                    <span class = "btn" onclick="returnGroup()" style = "background-color : #ED0000; color: white;">Annuler</span>
                 </div>            
             </form>
 
@@ -64,14 +64,35 @@
 </body>
 
 <script>
+    function returnGroup(){
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('groupe.html'));
+        let CheminComplet = document.location.href;
+        let idGroup  = CheminComplet.substring(CheminComplet.indexOf("?")+1);
 
-function actionFormatter(value, row, index) {
-    return [
-        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
-        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
-    ].join('');
-}
+        document.location.href= cheminFolder + "groupe.html?" + idGroup ;
+    }
 
+    function callSubmit(){
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('groupe.html'));
+        let firstName = document.querySelector('#firstName');
+        let lastName = document.querySelector('#lastName');
+        let mail = document.querySelector('#mail');
+        let CheminComplet = document.location.href;
+        let idGroup  = CheminComplet.substring(CheminComplet.indexOf("?")+1);
+        let mesInfos = {
+            prenom: firstName.value,
+            nom: lastName.value,
+            email: mail.value,
+        };
+
+        $.ajax({
+            dataType: "json",
+            type: "POST",
+            url: 'http://localhost:3000/groupForUser/' + idGroup,
+            data: mesInfos,
+            success: document.location.href= cheminFolder + "groupe.html?"+ idGroup
+        });
+    }
 </script>
 
 </html>

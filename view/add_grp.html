@@ -51,29 +51,6 @@
             </form>
 
         </div>
-
-        <script>
-            function callSubmit(){
-                let nameGroup = document.querySelector('.form-control');
-                let addGroup = document.querySelector('#add_group');
-                //let monForm = document.getElementById('add_group');
-                addGroup.addEventListener('click', function(event){
-                  event.preventDefault();
-                  let mesInfos = {
-                    nom: nameGroup.value
-                  };
-
-                  $.ajax({
-                    dataType: "json",
-                    type: "POST",
-                    url: 'http://localhost:3000/group/list',
-                    data: mesInfos,
-                    success: document.location.href="http://localhost/js/js1/docker_node_mongo/view/accueil.html"
-                  });
-                })
-            }
-        </script>
-       
         
     </div>
 
@@ -84,6 +61,21 @@
 </body>
 
 <script>
+
+function callSubmit(){
+    let nameGroup = document.querySelector('.form-control');
+    let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('accueil.html'));
+    let mesInfos = {
+        nom: nameGroup.value
+    };
+    $.ajax({
+        dataType: "json",
+        type: "POST",
+        url: 'http://localhost:3000/group/list',
+        data: mesInfos,
+        success: document.location.href= cheminFolder + "accueil.html"
+    });
+}
 
 function actionFormatter(value, row, index) {
     return [

@@ -1,4 +1,4 @@
-<script src="../../app.js"></script>
+
 <html>
 <head> 
 
@@ -50,42 +50,12 @@
                 <thead style = "text-align: center;">
                     <tr>
                         <th>Nom du groupe</th>
-                        <th  data-formatter="actionFormatter" >Actions</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
 
                 <tbody id="tbodyListGroup" style = "text-align: center;">
-			<tr>
-				<td> 
-				    <a href = "groupe.html">
-					Groupe 1
-				    </a>
-				</td>
-				<td>
-				    <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
-				    &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
-				</td>         
-                    	</tr>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                          $.ajax({
-                              dataType: "json",
-                              type: "GET",
-                              url: 'http://localhost:3000/group/list/',
-                              data: "check",
-                             success: callBackAjaxGroupList
-                            });
 
-                          function callBackAjaxGroupList(response) {
-                            return Object.values(response).forEach((res) => {
-                                let child = '<tr><td><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td></tr>';
-                                $('#tbodyListGroup').append(child);
-
-                            });
-                          }
-                        });
-
-                    </script>
                 </tbody>
 
         </table>
@@ -98,6 +68,32 @@
     </footer>
 
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      $.ajax({
+          dataType: "json",
+          type: "GET",
+          url: 'http://localhost:3000/group/list/',
+          data: "check",
+         success: callBackAjaxGroupList
+        });
+
+      function callBackAjaxGroupList(response) {
+        return Object.values(response).forEach((res, index) => {
+            let child = '<tr><td><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td>'+
+            '<td><button class="btn btn-primary btn-sm btn-edit" title="Modifier">'+
+            '<span class="fas fa-edit"></span></button>'+
+            '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" onclick="RemoveBtn()" title="Supprimer">'+
+            '<span class="fas fa-trash-alt"></span></button></td></tr>';
+            $('#tbodyListGroup').append(child);
+
+        });
+      }
+    });
+    function RemoveBtn(event) {
+        return console.log('DELETE: ', event);
+    }
+</script>
 
 </html>
 
