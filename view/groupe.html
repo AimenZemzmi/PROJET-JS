@@ -81,16 +81,11 @@
 
                 <tbody style = "text-align: center;">
                     <tr>
-                        <td> Prénom 1 Nom 1</td>                    
-                    </tr>
-                    <tr>
-                        <td> Prénom 2 Nom 2</td>                    
-                    </tr>
-                    <tr>
-                        <td> Prénom 3 Nom 3 </td>                    
-                    </tr>
-                    <tr>
-                        <td> Prénom 4 Nom 4 </td>                    
+                        <td> Prénom 1 Nom 1</td>      
+                        <td>
+                            <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
+                            &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
+                        </td>                   
                     </tr>
                 </tbody>
         </table>
@@ -103,17 +98,6 @@
     </footer>
 
 </body>
-
-<script>
-
-function actionFormatter(value, row, index) {
-    return [
-        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
-        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
-    ].join('');
-}
-
-</script>
 
 </html>
 
