@@ -76,7 +76,7 @@
       function callBackAjaxGroupList(response) {
         return Object.values(response).forEach((res, index) => {
             let child = '<tr><td id="group_'+index+'"><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td>'+
-            '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_'+index+'" title="Modifier">'+
+            '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_'+index+'" onclick="updateBtn('+index+')" title="Modifier">'+
             '<span class="fas fa-edit"></span></button>'+
             '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_'+index+'" onclick="RemoveBtn('+index+')" title="Supprimer">'+
             '<span class="fas fa-trash-alt"></span></button></td></tr>';
@@ -101,6 +101,20 @@
                 data: "checkDelete",
                 success: document.location.reload()
             });
+        }
+    }
+
+    function updateBtn(index) {
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('accueil.html'));
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/group/list/',
+            data: "check",
+            success: callBackAjaxUpdateBtn
+        });
+        function callBackAjaxUpdateBtn(response) {
+            document.location.href=cheminFolder+ "update_grp.html?" + response[index]._id;
         }
     }
 </script>
