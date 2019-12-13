@@ -34,8 +34,8 @@
     <div id = "contenu">    
 
         <center><h3><strong>Liste des groupes</strong></h3></center>
-       
-        <button class = "btn btn-success ajout-grp"> 
+
+        <button class = "btn btn-success ajout-grp">
             <a href = "add_grp.html">Ajouter un groupe</a>
         </button>
 
@@ -79,17 +79,19 @@
 
       function callBackAjaxGroupList(response) {
         return Object.values(response).forEach((res, index) => {
-            let child = '<tr><td><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td>'+
-            '<td><button class="btn btn-primary btn-sm btn-edit" title="Modifier">'+
+            let child = '<tr><td id="group_'+index+'"><a href="groupe.html?'+res._id+'">'+res.nom+'</a></td>'+
+            '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_'+index+'" title="Modifier">'+
             '<span class="fas fa-edit"></span></button>'+
-            '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" onclick="RemoveBtn()" title="Supprimer">'+
+            '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_'+index+'" onclick="RemoveBtn(event)" title="Supprimer">'+
             '<span class="fas fa-trash-alt"></span></button></td></tr>';
             $('#tbodyListGroup').append(child);
 
         });
       }
     });
+
     function RemoveBtn(event) {
+        console.log(event.target);
         return console.log('DELETE: ', event);
     }
 </script>
