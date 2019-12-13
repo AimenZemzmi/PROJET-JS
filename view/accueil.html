@@ -55,6 +55,17 @@
                 </thead>
 
                 <tbody id="tbodyListGroup" style = "text-align: center;">
+			<tr>
+				<td> 
+				    <a href = "groupe.html">
+					Groupe 1
+				    </a>
+				</td>
+				<td>
+				    <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
+				    &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
+				</td>         
+                    	</tr>
                     <script>
                         document.addEventListener('DOMContentLoaded', function() {
                           $.ajax({
@@ -87,17 +98,6 @@
     </footer>
 
 </body>
-
-<script>
-
-function actionFormatter(value, row, index) {
-    return [
-        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
-        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
-    ].join('');
-}
-
-</script>
 
 </html>
 
