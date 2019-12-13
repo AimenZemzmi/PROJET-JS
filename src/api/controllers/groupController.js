@@ -17,7 +17,6 @@ exports.list_group = (req, res) => {
 };
 
 exports.create_a_group = (req, res) => {
-    console.log(req);
     let new_group = new Group(req.body);
 
     new_group.save((error, group) => {

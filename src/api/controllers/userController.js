@@ -113,7 +113,6 @@ exports.list_user_santa_group = (req, res) => {
             });
 
             SantaChild.forEach(function(SC){
-                console.log(SC[1],'coucou');
                 User.findOneAndUpdate( {_id: SC[0]} , {idUser: SC[1] }, {new: true}, (error, adventure) => {
                     if(error){
                         console.log('erreur');
