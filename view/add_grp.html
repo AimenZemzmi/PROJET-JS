@@ -46,7 +46,7 @@
                     <!--<button onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</button>-->
                     <span id="add_group" onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</span>
                     &nbsp &nbsp
-                    <button class = "btn" style = "background-color : #ED0000; color: white;"><a href = "accueil.html">Annuler</a></button>
+                    <span class = "btn" onclick="returnAccueil()" style = "background-color : #ED0000; color: white;"><a href = "accueil.html">Annuler</a></span>
                 </div>
             </form>
 
@@ -77,11 +77,9 @@ function callSubmit(){
     });
 }
 
-function actionFormatter(value, row, index) {
-    return [
-        '<button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>',
-        '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>'
-    ].join('');
+function returnAccueil(){
+    let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('accueil.html'));
+    document.location.href= cheminFolder + "accueil.html";
 }
 
 </script>
