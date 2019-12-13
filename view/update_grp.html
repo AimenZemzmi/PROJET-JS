@@ -1,0 +1,79 @@
+<html xmlns="http://www.w3.org/1999/html">
+<head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
+    <link rel="icon" class="rounded" type="image/jpg" href="images/santa.png">
+    <link rel="stylesheet" href="css/santa.css">
+
+    <meta charset="utf-8">
+
+    <title>Secret Santa</title>
+</head>
+
+<body>
+    <nav id="menu" class="navbar navbar-expand-sm">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="accueil.html"><img src="images/santa.png" style="width: 35px;" ></a>
+            </li>
+        </ul>
+        <h2><strong>Secret Santa</strong></h2>
+    </nav id="menu">
+
+    <div id="contenu">
+        <center><h3>Modifier un groupe</h3></center>
+
+        <div id="formulaire">
+            <form id="formulaire-grp">
+                <label class="col-form-label" style="display: inline-block;">Nom du groupe </label>
+                <input class="form-control" type="text"/>
+                <br><br>
+
+                <div id="boutons_form">
+                    <!--<button onclick="callSubmit()" class = "btn" style = "background-color : #16B84E; color: white;">Ajouter</button>-->
+                    <span id="add_group" onclick="callSubmit()" class="btn" style="background-color : #16B84E; color: white;">Modifier</span>
+                    &nbsp; &nbsp;
+                    <span class="btn" onclick="returnAccueil()" style="background-color : #ED0000; color: white;"><a href = "accueil.html">Annuler</a></span>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+
+    <footer>
+        <center><p><strong>Et un joyeux Noël à tous</strong></p></center>
+    </footer>
+</body>
+
+<script>
+    function callSubmit() {
+        let nameGroup = document.querySelector('.form-control');
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('update_grp.html'));
+        let CheminComplet = document.location.href;
+        let idGroup = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+        let mesInfos = {
+            nom: nameGroup.value
+        };
+        $.ajax({
+            dataType: "json",
+            type: "PUT",
+            url: 'http://localhost:3000/group/list/' + idGroup,
+            data: mesInfos,
+            success: document.location.href = cheminFolder + "accueil.html"
+        });
+    }
+
+    function returnAccueil() {
+        let cheminFolder = document.location.href.substring(0, document.location.href.lastIndexOf('accueil.html'));
+        document.location.href = cheminFolder + "accueil.html";
+    }
+</script>
+</html>
+

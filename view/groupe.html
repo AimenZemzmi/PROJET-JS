@@ -1,0 +1,206 @@
+<html>
+<head> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
+    <link rel="icon" class="rounded" type="image/jpg" href="images/santa.png">
+    <link rel="stylesheet" href="css/santa.css">
+
+    <meta charset="utf-8">
+
+    <title>Secret Santa</title>
+</head>
+
+<body>
+    <nav id="menu" class="navbar navbar-expand-sm" style="background-color: #ED0000; color: #ffffff;">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="accueil.html"><img src="images/santa.png" style="width: 35px;" ></a>
+            </li>
+        </ul>
+        <h2><strong>Secret Santa</strong></h2>
+    </nav>
+
+    <div id="contenu">
+        <center><h3><strong>Liste des personnes présentes</strong></h3></center>
+
+        <!--<button onclick="creatUser()" class="btn btn-success">Ajouter une personne</button>-->
+        <a onclick="creatUser()" class="btn btn-success" style="color: white">Ajouter une personne</a>
+
+        <div id="tableau">
+            <table id="tbl-personne" class="table table-striped table-hover"
+                data-page-size="15"
+                data-page-list="[5,10,15,20,50,100,200,500,All]"
+                data-search="false">
+
+                <thead style="text-align: center">
+                    <tr>
+                        <th>Membres</th>
+                        <th>Cadeau</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tbodyListGroup" style="text-align: center;"></tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <footer>
+        <center><p><strong>Et un joyeux Noël à tous</strong></p></center>
+    </footer>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+        let CheminComplet = document.location.href;
+        let idGroupUrl = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupForUser/' + mesInfos.idGroup,
+            success: callBackAjaxGroupListOnce
+        });
+
+        function callBackAjaxGroupListOnce(response) {
+            return Object.values(response).forEach((res, index) => {
+                if (res.idUser != "0") {
+                    $.ajax({
+                        dataType: "json",
+                        type: "GET",
+                        url: 'http://localhost:3000/groupForUser/' + mesInfos.idGroup + '/user/' + res.idUser,
+                        success: callBackAjaxGroupForUser
+                    });
+
+                    function callBackAjaxGroupForUser(result) {
+                        let resultName;
+                        if(result != null) {
+                            resultName = result.nom;
+                        } else {
+                            resultName = res;
+                        }
+                        let child = '<tr id="simpleLine"><td id="' + res._id + '">' + res.nom + ' ' + res.prenom + '</td></td>'+
+                                    '<td><p id ="' + index + '" style = "display : none;">' + resultName + '</p>' +
+                                    '<button id ="' + index + '" class ="btn btn-gift" style = "background-color: #f39c12; color: white;" onclick="afficher_Cadeau(' + index + ')">' +
+                                    '<i class="fas fa-gift"></i></button></td>' +
+                                    '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_' + index + '" onclick="updateBtn(' + index + ')" title="Modifier">' +
+                                    '<span class="fas fa-edit"></span></button>' +
+                                    '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_' + index + '" onclick="RemoveBtn(' + index + ')" title="Supprimer">' +
+                                    '<span class="fas fa-trash-alt"></span></button></td></tr>';
+                        $('#tbodyListGroup').append(child);
+                    }
+                } else {
+                    let child = '<tr id="simpleLine"><td id="' + res._id + '">' + res.nom + ' ' + res.prenom + '</td></td>'+
+                                '<td><p id ="' + index + '" style = "display : none;">' + res + '</p>'+
+                                '<button id ="' + index + '" class ="btn btn-gift" style = "background-color: #f39c12; color: white;" onclick="afficher_Cadeau(' + index + ')">' +
+                                '<i class="fas fa-gift"></i></button></td>' +
+                                '<td><button class="btn btn-primary btn-sm btn-edit buttonEdit_' + index + '" onclick="updateBtn(' + index + ')" title="Modifier">' +
+                                '<span class="fas fa-edit"></span></button>'+
+                                '&nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove buttonRemove_' + index + '" onclick="RemoveBtn(' + index + ')" title="Supprimer">' +
+                                '<span class="fas fa-trash-alt"></span></button></td></tr>';
+                    $('#tbodyListGroup').append(child);
+                }
+            });
+        }
+        setTimeout(function() {
+                if (document.querySelectorAll('#simpleLine').length >= 2) {
+                    $('#contenu').append('<button onclick="generateGift()" class="btn btn-success">Lancer le Secret Santa</button>');
+                }
+        }, 100);
+    });
+
+
+    function creatUser() {
+            let cheminFolder = document.location.href.substring(0, document.location.href.lastIndexOf('add_personne.html'));
+            let CheminComplet = document.location.href;
+            let idGroup = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+            document.location.href = cheminFolder + "add_personne.html?" + idGroup;
+        }
+
+    function afficher_Cadeau(index) {
+        let div_cache = document.getElementById(index);
+        if (div_cache.style.display == 'none') {
+            div_cache.style.display = 'block';
+            if((div_cache.textContent == "[object Object]") && (document.querySelectorAll('#simpleLine').length < 2)) {
+                div_cache.textContent = "Vous devez avoir 2 personnes minimum dans ce groupe";
+            } else if (div_cache.textContent == "[object Object]") {
+                div_cache.textContent = "Lancer le Secret Santa";
+            }
+        }
+        else if (div_cache.style.display != 'none') {
+            div_cache.style.display = 'none';
+        }
+    }
+
+    function generateGift() {
+        let CheminComplet = document.location.href;
+        let idGroupUrl = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupSanta/' + mesInfos.idGroup,
+            success: document.location.reload()
+        })
+    }
+
+    function RemoveBtn(index) {
+        let CheminComplet = document.location.href;
+        let idGroupUrl = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupForUser/' + mesInfos.idGroup,
+            success: callBackAjaxGroupListRemove
+        });
+        function callBackAjaxGroupListRemove(resultGroupListUsers) {
+            $.ajax({
+                dataType: "json",
+                type: "DELETE",
+                url: 'http://localhost:3000/groupForUser/' + mesInfos.idGroup+'/user/' + resultGroupListUsers[index]._id,
+                data: "checkDelete",
+                success: document.location.reload()
+            });
+        }
+    }
+
+    function updateBtn(index) {
+        let CheminComplet = document.location.href;
+        let idGroupUrl = CheminComplet.substring(CheminComplet.indexOf("?") + 1);
+        let mesInfos = {
+            idGroup: idGroupUrl
+        };
+        let cheminFolder = document.location.href.substring(0,document.location.href.lastIndexOf('groupe.html'));
+
+        $.ajax({
+            dataType: "json",
+            type: "GET",
+            url: 'http://localhost:3000/groupForUser/' + mesInfos.idGroup,
+            success: callBackAjaxUpdateBtn
+        });
+
+        function callBackAjaxUpdateBtn(result) {
+            document.location.href=cheminFolder + "update_personne.html?" + mesInfos.idGroup + "?" + result[index]._id;
+        }
+    }
+</script>
+</html>

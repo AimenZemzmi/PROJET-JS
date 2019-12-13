@@ -1,0 +1,90 @@
+body {
+    background-image: url("../images/fond.gif");
+    position: relative;
+}
+
+#menu {
+    background-color: #dc3545; 
+    color: #ffffff;
+}
+
+h2 {
+    display:block; 
+    margin: auto;
+}
+
+footer{
+    position: fixed;
+    bottom: 0; 
+    left: 0; 
+    right: 0;    
+    background-color: #28a745;
+    color: white;
+}
+
+#contenu {
+    margin-top : 35px;
+    margin-right: 35px;
+    margin-left: 35px;
+}
+
+#formulaire{
+    margin-top: 100px;
+}
+
+#formulaire-grp{
+    width : 50%;
+    display : block;
+    margin: auto;
+}
+
+.ajout-grp,  .ajout-personne, a {
+    color : white;
+}
+
+.ajout-grp, .ajout-personne, a:hover {
+    text-decoration: none;
+    color : white;
+}
+
+#boutons_form {
+    display: block;
+    margin: auto;
+}
+
+.bootstrap-table .fixed-table-container .fixed-table-body {
+    height: unset !important;
+}
+
+thead{
+    background-color: #f39c12;
+    border-color:#e67e22;
+}
+
+tbody {
+    background-color : #ffffff;
+}
+
+tbody tr :hover{
+    background-color: #ACA6A6;
+}
+  
+#tableau {
+    overflow: auto;
+    height : 400px;
+    margin-top : 20px;
+}
+
+#tbl-grp {
+    text-align : center; 
+    border: none;
+}
+
+#tbl-grp a {
+    color: black;
+}
+
+#tbl-grp a:hover {
+    color: orange;
+    text-decoration: none;
+}
