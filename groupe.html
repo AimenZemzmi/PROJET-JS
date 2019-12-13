@@ -47,6 +47,7 @@
                     <thead style = "text-align: center;">
                         <tr>
                             <th>Membres</th>
+                            <th>Cadeau</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -55,6 +56,11 @@
                         <tr>
                             <td> Prénom 1 Nom 1</td>      
                             <td>
+                                <p id ="0" style = "display : none;">
+                                   Prénom 1 Nom 1</p>
+                                <button class ="btn btn-gift" style = "background-color: #f39c12; color: white;" onclick="afficher_Cadeau()"><i class="fas fa-gift"></i></button>
+                            </td>
+                            <td>
                                 <button class="btn btn-primary btn-sm btn-edit" title="Modifier"><span class="fas fa-edit"></span></button>
                                 &nbsp;&nbsp;<button class="btn btn-danger btn-sm btn-remove" title="Supprimer"><span class="fas fa-trash-alt"></span></button>
                             </td>                   
@@ -62,6 +68,8 @@
                     </tbody>
                 </div>
             </table>
+
+
 
     </div>
 
@@ -73,6 +81,20 @@
 </body>
 
 
+<script>
+
+function afficher_Cadeau(){
+    var div_cache = document.getElementById("0");
+
+    if (div_cache.style.display == 'none'){
+        div_cache.style.display = 'block';
+    }
+    else{
+        div_cache.style.display = 'none';
+    }
+}
+
+</script>
 
 </html>
 
